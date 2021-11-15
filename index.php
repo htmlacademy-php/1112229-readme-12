@@ -1,5 +1,6 @@
 <?php
 $is_auth = rand(0, 1);
+include_once "helpers.php";
 
 $user_name = 'Алексей'; // укажите здесь ваше имя
 
@@ -38,7 +39,15 @@ $articles = [
         'content' => 'www.htmlacademy.ru',
         'user_name' => 'Владик',
         'avatar' => 'userpic.jpg',
-    ]
+    ],
+    [
+        'title' => 'Байкал>',
+        'type' => 'post-text',
+        'content' => 'Озеро Байкал – огромное древнее озеро в горах Сибири к северу от монгольской границы. Байкал считается самым глубоким озером в мире. Он окружен сетью пешеходных маршрутов, называемых Большой байкальской тропой.
+Деревня Листвянка, расположенная на западном берегу озера, – популярная отправная точка для летних экскурсий. Зимой здесь можно кататься на коньках и собачьих упряжках.',
+        'user_name' => 'Лариса',
+        'avatar' => 'userpic-larisa-small.jpg',
+    ],
 ];
 ?>
 <!DOCTYPE html>
@@ -261,7 +270,7 @@ $articles = [
                     <?php elseif($article['type'] == 'post-link') : ?>
                         <!--содержимое для поста-ссылки-->
                         <div class="post-link__wrapper">
-                            <a class="post-link__external" href="http://<?php echo $article['content']; ?>" title="Перейти по ссылке">
+                            <a class="post-link__external" href="<?php echo $article['content']; ?>" title="Перейти по ссылке">
                                 <div class="post-link__info-wrapper">
                                     <div class="post-link__icon-wrapper">
                                         <img src="https://www.google.com/s2/favicons?domain=vitadental.ru" alt="Иконка ">
@@ -294,7 +303,7 @@ $articles = [
                         </div>
                     <?php elseif($article['type'] == 'post-text') : ?>
                         <!--содержимое для поста-текста-->
-                        <p><?php echo $article['content']; ?></p>
+                        <p><?php echo textpost_cut($article['content']); ?></p>
                     <?php endif; ?>
                 </div>
                 <footer class="post__footer">
