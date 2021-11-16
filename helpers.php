@@ -262,3 +262,35 @@ function generate_random_date($index)
 
     return $dt;
 }
+
+/**
+ * @param $text - получаем текст для проверки и преобраования
+ * @return string
+ */
+function textpost_cut($text)
+{
+    if (mb_strlen($text) >= 300)
+    {
+        $words = explode(" ", $text);
+        $new_words = [];
+        $lenght_post = 0;
+        $i = 0;
+        while($lenght_post<300)
+        {
+            $lenghtif = $lenght_post + mb_strlen($words[$i]);
+            if ($lenghtif >= 300)
+            {
+                $lenghtif = 0;
+            }
+            else
+            {
+                $new_words[$i] = $words[$i];
+                $i++;
+            }
+        }
+        $new_text = implode($new_words, " ");
+    }
+    else $new_text = $text;
+
+    return $new_text = $new_text . " " . mb_strlen($new_text);
+}
