@@ -303,7 +303,7 @@ $articles = [
                         </div>
                     <?php elseif($article['type'] == 'post-text') : ?>
                         <!--содержимое для поста-текста-->
-                        <p><?php echo textpost_cut($article['content']); ?></p>
+                        <?php echo textpost_cut($article['content']); ?>
                     <?php endif; ?>
                 </div>
                 <footer class="post__footer">
