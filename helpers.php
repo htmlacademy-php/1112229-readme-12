@@ -158,7 +158,8 @@ function check_youtube_url($url)
 {
     $id = extract_youtube_id($url);
 
-    set_error_handler(function () {}, E_WARNING);
+    set_error_handler(function () {
+    }, E_WARNING);
     $headers = get_headers('https://www.youtube.com/oembed?format=json&url=http://www.youtube.com/watch?v=' . $id);
     restore_error_handler();
 
@@ -267,30 +268,23 @@ function generate_random_date($index)
  * @param $text - получаем текст для проверки и преобраования
  * @return string
  */
-function textpost_cut($text)
+function textpost_cut($text, $char_limit = 300)
 {
-    if (mb_strlen($text) >= 300)
-    {
+    if (mb_strlen($text) >= $char_limit) {
         $words = explode(" ", $text);
         $new_words = [];
-        $lenght_post = 0;
+        $length_post = 0;
         $i = 0;
-        while($lenght_post<300)
-        {
-            $lenghtif = $lenght_post + mb_strlen($words[$i]);
-            if ($lenghtif >= 300)
-            {
-                $lenghtif = 0;
-            }
-            else
-            {
+        while ($length_post < $char_limit) {
+            $length_post = $length_post + mb_strlen($words[$i]);
+            if ($length_post < $char_limit) {
                 $new_words[$i] = $words[$i];
-                $i++;
+                $length_post = $length_post + 1;
             }
+            $i++;
         }
-        $new_text = implode($new_words, " ");
+        $new_text = implode(" ", $new_words);
+        return "<p>" . $new_text . "..." . "</p>" . "<a class=\"post-text__more-link\" href=\"#\">Читать далее</a>";
     }
-    else $new_text = $text;
-
-    return $new_text = $new_text . " " . mb_strlen($new_text);
+    return "<p>" . $text . "</p>";
 }
