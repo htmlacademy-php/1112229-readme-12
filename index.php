@@ -1,4 +1,6 @@
 <?php
+require_once ('helpers.php');
+
 $articles_col = [
     [
         'title' => 'Цитата',
@@ -44,8 +46,6 @@ $articles_col = [
         'avatar' => 'userpic-larisa-small.jpg',
     ],
 ];
-
-require_once ('helpers.php');
 
 $page_content = include_template('main.php', ['articles' => $articles_col]);
 $layout_content = include_template('layout.php', ['content'=>$page_content,'page_title'=>'Главная страница']);

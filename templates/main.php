@@ -153,7 +153,12 @@
                                 </div>
                                 <div class="post__info">
                                     <b class="post__author-name"><?php echo $article['user_name']; ?></b>
-                                    <time class="post__time" datetime="">дата</time>
+                                    <?php
+                                          $number_post = key($articles);
+                                          $time_post = generate_random_date($number_post);
+                                          $time_stamp = strtotime($time_post);
+                                    ?>
+                                    <time class="post__time" datetime="<?php echo $time_post?>" title="<?php echo date('d-m-Y G:i',$time_stamp) ?>"><?php echo rus_time_formate( $time_stamp) ?></time>
                                 </div>
                             </a>
                         </div>

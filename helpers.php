@@ -288,3 +288,44 @@ function textpost_cut($text, $char_limit = 300)
     }
     return "<p>" . $text . "</p>";
 }
+
+/**
+ * Функция вычисляет удобно читаемую дату из timestamp
+ *
+ * @param $datetime - примнимаем дату в timestamp формате
+ * @return string возвращаем строку с удобно читаемой датой
+ */
+function rus_time_formate($datetime)
+{
+    $today_date = time();
+    $time_dif = $today_date - $datetime;
+    $month = $time_dif / 86400 / 7 % 4;
+    $w     = $time_dif / 86400 / 7;
+    $d     = $time_dif / 86400 % 7;
+    $h     = $time_dif / 3600 % 24;
+    $m     = $time_dif / 60 % 60;
+
+    /** return $datetime . " = DataTime Random, " .  $today_date . " = Today, " .  $time_dif . "= TimeDif, " . $month . " месяцев, " . $w . " Недель, " . $d . " Дней, " . $h . " часов, " . $m . " минут"; */
+
+    if ($w > 5)
+        {
+          return $month . " " . get_noun_plural_form($month, "месяц", "месяца", "месяцев") . " назад";
+        }
+    elseif ($d > 7 AND $w < 5)
+        {
+            return $w . " " . get_noun_plural_form($w, "неделю", "недели", "недель") . " назад";
+        }
+    elseif ($h > 24 AND $d < 7)
+        {
+            return $d . " " . get_noun_plural_form($d, "день", "дня", "дней") . " назад";
+        }
+    elseif ($m > 60 AND $h < 24)
+        {
+            return $h . " " . get_noun_plural_form($h, "час", "часа", "часов") . " назад";
+        }
+    elseif ($m < 60)
+        {
+            return $m . " " . get_noun_plural_form($m, "минуту", "минуты", "минут") . " назад";
+        }
+
+}
