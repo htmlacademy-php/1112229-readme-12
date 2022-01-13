@@ -290,7 +290,10 @@ function textpost_cut($text, $char_limit = 300)
 }
 
 /**
- * @param $datetime - получаем дату в формате random_date
+ * Функция вычисляет удобно читаемую дату из timestamp
+ *
+ * @param $datetime - примнимаем дату в timestamp формате
+ * @return string возвращаем строку с удобно читаемой датой
  */
 function rus_time_formate($datetime)
 {
